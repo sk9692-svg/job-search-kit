@@ -39,6 +39,9 @@ Read the profile once and fix anything – it drives every search. Then:
 - **"Run the job search for Canada"** – finds new jobs, scores them and drafts cover letters
 - **"Start my application assistant"** – helps you apply; you click Submit
 - **"Tailor my resume for lead 12"** – a version of your resume focused on that job, using only your real experience
+- **"Search Naukri and Instahyre with my browser"** – a live search while you're online, for portals the normal search
+  can't read (needs the Claude in Chrome extension or the Claude desktop app). It reads only the first couple of
+  result pages, never signs in or applies, and stops if a site shows a CAPTCHA.
 
 **Just want to try it?** Say **"quick job search"**. It searches one country and shows the best matches in the chat,
 with no Google connection and nothing saved.
@@ -109,8 +112,9 @@ countries you're serious about.
 
 ## Limitations
 
-- LinkedIn, Seek and Indeed pages can't be read automatically; the agent finds the same job on the employer's site,
-  or uses your job-alert emails.
+- Many job portals (LinkedIn, Seek, Indeed, Naukri, Instahyre and others) can't be read by scheduled runs; those use
+  your job-alert emails and the employer's own site. Live browser search reads some of them while you're online, but
+  it's deliberately limited – portals don't allow bulk automated collection, and heavy use can get accounts restricted.
 - Visa and work-permit rules change. The examples are starting points, not immigration advice – check official
   government sources.
 - AI can make mistakes. Review every lead and every draft before you use it.
