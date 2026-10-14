@@ -1,32 +1,102 @@
 ---
 name: job-search-agent
-description: Use when the user asks to run their job search for a country, or when a scheduled task says "run the job-search agent for {country}". Finds new matching jobs, checks visa or work-rights fit, logs them in the Google Sheets tracker and drafts cover letters and LinkedIn notes.
+description: Use when the user asks to set up their job search, try a quick job search, or run their job search for a country, or when a scheduled task says "run the job-search agent for {country}". Sets up a Google Sheets tracker and profile from a short chat, finds new matching jobs, checks visa or work-rights fit, logs them and drafts cover letters and LinkedIn notes.
 ---
 
-# Job-search agent (one country per run)
+# Job-search agent
 
-Finds jobs that are new since the last run for ONE target country, checks each one against the user's resume and
-work-rights situation, writes the good ones to their Google Sheets tracker with application drafts, and remembers
-what it rejected so it never checks the same job twice.
+Three modes – pick by what the user asked and what is connected:
 
-It never applies, submits forms, signs in, sends messages or contacts anyone. Finding, logging and drafting only.
+| User says | Mode | Go to |
+|---|---|---|
+| "set up my job search", "get started", or a search when no tracker exists yet | **Setup** – creates everything from a short chat | Part A |
+| "quick job search", "try it", or Google Drive/Sheets aren't connected | **Quick try** – results in chat, nothing saved | Part B |
+| "run the job search for {country}", or a scheduled task | **Search run** – the full run | Steps 0–9 |
 
-No editing needed: everything personal is read from the user's tracker (its **Settings** tab) and the documents linked there.
+In every mode it never applies, submits forms, signs in, sends messages or contacts anyone. Finding, logging and
+drafting only.
 
-## 0. Load tools and settings
+## Part A – Setup ("set up my job search")
+
+Goal: the user uploads the skills, connects Google, says one sentence, answers a few questions, and is ready.
+Everything personal is stored in their own Google Drive. Read `tracker-layout.md` (in this skill's folder) before
+creating anything.
+
+**A1. Check connections.** Load the Google Drive and Google Sheets tools with ToolSearch (Gmail too, optional).
+If Drive or Sheets is missing, say which connector to connect in Claude's settings for the full version, and offer
+Part B (quick try) meanwhile.
+
+**A2. Check for an existing tracker.** Drive `search_files` with
+`title = 'Job Search Tracker' and mimeType = 'application/vnd.google-apps.spreadsheet' and owner = 'me'`.
+If one exists, ask whether to use it (then skip to A6 to fill anything missing) or create a new one.
+
+**A3. Short interview.** Ask in ONE message (AskUserQuestion for the multiple-choice parts if available). Keep it
+friendly; say optional items can be skipped.
+1. Target job titles, and current title with years of experience
+2. Countries (and cities, or remote) to search in
+3. For each country: citizen / permanent resident / already have a work permit / need sponsorship
+4. Deal-breakers (e.g. security clearance, a language they don't speak, contract-only)
+5. Work mode (remote / hybrid / onsite) and permanent vs contract
+6. For forms and cover letters (optional): name, email, phone, LinkedIn, city, notice period, salary expectation
+7. **Attach your resume** (PDF or Word), or paste it as text
+Never ask for ID numbers, passport, bank or card details – and don't store them if offered.
+
+**A4. Read the resume.** Use the attached file's text exactly. Don't add, improve or invent anything. If nothing
+was attached, ask once more; if still none, create the resume doc with a note "Paste your resume here" and say the
+search will be weaker until it's filled in.
+
+**A5. Create the files** (Drive `create_file`):
+1. Folder **Job Search Kit** (`application/vnd.google-apps.folder`), and inside it a folder **Cover Letters**.
+2. Doc **Resume (plain text)** in Job Search Kit: `contentMimeType` `text/plain`, the resume text as given.
+3. Doc **Candidate Profile** in Job Search Kit: `text/plain`, following the sections of the kit's profile template
+   (Who I am · Roles I want · How to score fit · Deal-breakers · Work-rights situation · Application answers ·
+   Drafts · Country notes), filled ONLY from the user's answers and resume. Anything not given → "ask me".
+   In "How to score fit", write strong / OK / weak from their target roles and core skills. In "Drafts", take
+   experience highlights from the resume only, and write one logistics sentence per country from their answers.
+4. Sheet **Job Search Tracker** in Job Search Kit (`application/vnd.google-apps.spreadsheet`). Build it exactly as
+   `tracker-layout.md` says: rename the first tab and `addSheet` the rest in one `update_spreadsheet` call; write each
+   tab's header (and Summary formulas, Settings rows, Start Here text) with `update_values`; one more
+   `update_spreadsheet` call for header formatting, frozen rows and dropdowns.
+5. Fill **Settings** with the three links and defaults, and **Markets** with one row per country (routes and boards
+   from `tracker-layout.md`, keywords from their target roles).
+
+**A6. Verify.** Read back `Settings!A:B`, `Markets!A:F` and one header row; fix anything missing.
+
+**A7. Hand over.** Tell the user, briefly: what was created (link the folder and the Sheet), that they should read the
+Candidate Profile once and correct anything (it drives every search), and the two commands:
+"Run the job search for {first country}" and "Start my application assistant". Offer to run the first search now,
+and to create scheduled tasks (one per country, e.g. twice a week) whose prompt is
+"Run the job-search-agent skill for {country}. My tracker is {Sheet link}."
+
+## Part B – Quick try (no Google needed)
+
+For someone trying it out, or without Google connected. Nothing is saved.
+1. Ask in one message: target titles, one country (and city or remote), whether they need sponsorship there, and to
+   attach or paste their resume (optional but makes the fit scores real).
+2. Search that country's boards and employer careers pages (WebSearch / WebFetch) for roles posted in the last 14 days.
+   Open up to 10 promising postings and read each in full.
+3. Score each honestly (Step 6 rules: fit 1–10, matched, missing, work-rights evidence; reject citizens-only /
+   no-sponsorship ads if they need sponsorship).
+4. Show the best 5–8 in a table: Company · Role · Location · Fit · Why · Work rights · Link. Mention how many were
+   rejected and why, in one line.
+5. Offer the full version: "Connect Google Drive and Sheets, then say *set up my job search* – I'll keep a tracker,
+   avoid duplicates, draft cover letters and run this on a schedule."
+
+## 0. Load tools and settings (search run)
 
 1. Load the Google Sheets, Google Drive and (optional) Gmail connector tools with ToolSearch.
-   WebSearch / WebFetch do all web reading.
+   WebSearch / WebFetch do all web reading. If Drive or Sheets is missing, say so and offer Part B.
 2. Find the tracker: use the Google Sheet link in the request or scheduled-task prompt if there is one. Otherwise Drive
    `search_files` with `title = 'Job Search Tracker' and mimeType = 'application/vnd.google-apps.spreadsheet' and owner = 'me'`.
-   If none is found, stop and say how to set it up (see the kit README). If several, use the most recently modified and say so.
-   The spreadsheet ID is the part of the link between `/d/` and `/edit`.
+   If none is found and the user is here, offer to set it up now (Part A). In a scheduled run with no one present,
+   stop and say "No Job Search Tracker found – say *set up my job search* first." If several, use the most recently
+   modified and say so. The spreadsheet ID is the part of the link between `/d/` and `/edit`.
 3. `get_values` on `Settings!A:B` and read:
    - `profile_doc` – Candidate Profile (Google Doc link)
    - `resume_doc` – resume as plain text (Google Doc link)
    - `cover_letter_folder` – Drive folder link for cover-letter drafts
    - `timezone` – e.g. America/Toronto (TODAY = the date in this timezone, YYYY-MM-DD)
-   - `min_fit_score` (default 6), `cover_letter_min_fit` (default 7), `max_new_postings_per_run` (default 25)
+   - `min_fit_score` (default 6), `cover_letter_min_fit` (default 7), `max_new_postings_per_run` (default 15)
    - `use_gmail_alerts` – yes / no
 4. `get_values` on `Markets!A:F` and find the row for the country you were asked to run
    (columns: Country | Work-rights route | Job boards | Search keywords | Cities | Notes). If the country is missing, stop and

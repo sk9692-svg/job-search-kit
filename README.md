@@ -11,20 +11,40 @@ Your data stays in your own Google Drive and Claude account. Nothing is sent to 
 
 | File | What it is |
 |---|---|
-| `skills/job-search-agent/` | Finds and verifies new jobs for one country per run, writes leads and drafts to your tracker |
+| `skills/job-search-agent/` | Sets everything up from a short chat, then finds and verifies new jobs for one country per run |
 | `skills/apply-assistant/` | On-demand: updates application statuses from Gmail, removes duplicates, helps fill forms |
-| `templates/Job_Search_Tracker.xlsx` | Blank tracker (leads, applications, watchlist, settings…) |
-| `templates/candidate-profile-template.md` | The profile both skills read: your skills, targets, deal-breakers, form answers |
+| `dist/` | The two skills as ready-to-upload zips |
+| `templates/` | Blank tracker and profile template – only needed for manual setup |
 | `examples/markets/` | Example rows for Canada, Germany, New Zealand, Australia, UK |
 
 ## What you need
 
 - A paid Claude plan is recommended (Free works for trying it, but scheduled runs use a lot of usage).
 - "Code execution and file creation" turned on in Claude **Settings → Capabilities** (skills need it).
-- The **Google Drive**, **Google Sheets** and (optional) **Gmail** connectors connected in Claude.
+- The **Google Drive** and **Google Sheets** connectors connected in Claude (**Gmail** optional).
 - For the apply assistant: a browser Claude can use (Claude in Chrome, or the browser in the Claude desktop app).
 
-## Setup (about 30 minutes)
+## Quick start (about 5 minutes)
+
+1. Download `job-search-agent.zip` and `apply-assistant.zip` from the latest
+   [release](https://github.com/sk9692-svg/job-search-kit/releases) (or the `dist/` folder).
+2. In Claude go to **Customize → Skills**, click **+ → Create skill → Upload a skill**, upload each zip,
+   and toggle both on. Connect Google Drive and Google Sheets.
+3. In a new chat, say: **"Set up my job search"** and attach your resume.
+
+Claude asks a few questions (roles, countries, whether you need sponsorship, deal-breakers), then creates a
+**Job Search Kit** folder in your Google Drive with your tracker, your profile and a cover-letters folder.
+Read the profile once and fix anything – it drives every search. Then:
+
+- **"Run the job search for Canada"** – finds new jobs, scores them and drafts cover letters
+- **"Start my application assistant"** – helps you apply; you click Submit
+
+**Just want to try it?** Say **"quick job search"**. It searches one country and shows the best matches in the chat,
+with no Google connection and nothing saved.
+
+## Manual setup (optional)
+
+Prefer to build the files yourself? About 30 minutes.
 
 ### 1. Tracker
 1. Upload `templates/Job_Search_Tracker.xlsx` to Google Drive.
@@ -51,7 +71,7 @@ Optionally add favourite employers to **Watchlist** (priority A = scanned every 
 - `Run the job-search agent for Canada` – check the leads it adds and the cover-letter drafts.
 - `Start my application assistant` – it updates statuses and walks you through the new leads.
 
-### 6. Schedule the searches (optional)
+## Schedule the searches (optional)
 Ask Claude to create a scheduled task, one per country, for example:
 
 > Create a scheduled task that runs every Monday and Thursday at 7:00 am with this prompt:

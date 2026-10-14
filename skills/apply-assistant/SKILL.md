@@ -19,7 +19,8 @@ Arguments the user may give: a country ("canada"), lead numbers ("12, 21, 22"), 
 1. Load Google Sheets, Google Drive and Gmail tools with ToolSearch.
 2. Find the tracker: use a Google Sheet link the user gave, otherwise Drive `search_files` with
    `title = 'Job Search Tracker' and mimeType = 'application/vnd.google-apps.spreadsheet' and owner = 'me'`.
-   None found → explain the setup (see the kit README). Several → ask which one.
+   None found → tell the user to say "set up my job search" first (the job-search-agent skill creates the tracker),
+   then stop. Several → ask which one.
 3. Read `Settings!A:B` for `profile_doc`, `resume_doc`, `cover_letter_folder`, `timezone`.
 4. Read the Candidate Profile and resume docs. The profile's **"Application answers"** section holds the contact
    details, work-authorisation answers, notice period, relocation and salary expectations to use in forms.
