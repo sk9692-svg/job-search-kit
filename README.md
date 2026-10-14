@@ -7,6 +7,8 @@ review everything and click Submit yourself.
 
 Your data stays in your own Google Drive and Claude account. Nothing is sent to the author of this kit.
 
+*An independent, community project – not made by or affiliated with Anthropic. "Claude" is Anthropic's product.*
+
 ## What's inside
 
 | File | What it is |
@@ -23,14 +25,18 @@ Your data stays in your own Google Drive and Claude account. Nothing is sent to 
 
   | | Free | Paid (Pro, Max, Team, Enterprise) |
   |---|---|---|
-  | Setup, manual searches, quick try, tailored resume, apply assistant | ✅ | ✅ |
+  | Setup, manual searches, quick try, tailored resume, application status updates | ✅ | ✅ |
+  | Filling application forms and live browser search (need Claude in Chrome) | ❌ | ✅ |
   | Automatic scheduled searches (e.g. twice a week, overnight) | ❌ | ✅ |
   | Room for full search runs | Limited – a run reads many pages and may hit Free limits | ✅ More room |
 
-  On Free, start with **"quick job search"**, or lower `max_new_postings_per_run` in Settings (e.g. 5).
+  On Free, start with **"quick job search"**, or lower `max_new_postings_per_run` in Settings (e.g. 5). The apply
+  assistant still lists your new jobs without duplicates and gives you the links, cover letters and answers to paste.
+  Plans and features change – check [Claude's help center](https://support.claude.com) for the current details.
 - "Code execution and file creation" turned on in Claude **Settings → Capabilities** (skills need it).
 - The **Google Drive** and **Google Sheets** connectors connected in Claude (**Gmail** optional).
-- For the apply assistant: a browser Claude can use (Claude in Chrome, or the browser in the Claude desktop app).
+- For filling forms and live browser search: the **Claude in Chrome** extension (paid plans), or the Claude desktop
+  app's browser where available.
 
 ## Quick start (about 5 minutes)
 
@@ -126,6 +132,26 @@ countries you're serious about.
 - Visa and work-permit rules change. The examples are starting points, not immigration advice – check official
   government sources.
 - AI can make mistakes. Review every lead and every draft before you use it.
+
+## Stop or remove it
+
+- **Pause searches:** pause or delete the scheduled tasks in Claude.
+- **Remove the skills:** Claude → Customize → Skills → turn them off or delete them.
+- **Delete your data:** delete the **Job Search Kit** folder in Google Drive (tracker, profile, resume copy, cover
+  letters). Nothing else is stored by the kit.
+- **Disconnect Google:** remove the Google connectors in Claude's settings if you no longer need them.
+
+## Changelog
+
+- **v0.2** – One-sentence setup ("Set up my job search"), quick-try mode without Google, India job boards via alerts,
+  tailored resume per job (real facts only), live browser search for portals like Naukri and Instahyre, Free vs paid
+  guide.
+- **v0.1** – First release: search agent, apply assistant, tracker template, profile template.
+
+## Problems or ideas?
+
+Open an [issue on GitHub](https://github.com/sk9692-svg/job-search-kit/issues): what you asked Claude, what happened,
+and what you expected. Please remove personal details (resume text, emails, phone numbers) before posting.
 
 ## License
 

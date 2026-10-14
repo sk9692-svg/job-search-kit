@@ -87,7 +87,9 @@ b. Find the direct employer apply link (not an aggregator) and note the ATS.
 c. Cover letter: use column W. If empty and fit is 7+, write one following the profile's Drafts section and the
    FACTS RULE, save it in the cover-letter folder and put its link in W.
 c2. Tailored resume (offer it; make it only on a yes): see "Tailored resume" below. Use it as the upload for this job.
-d. Open the apply page in the user's browser (read that browser's skill first).
+d. Open the apply page in the user's browser (read that browser's skill first). No browser tools in this session
+   (e.g. no Claude in Chrome) → skip e–g: give the user the direct apply link, the cover letter and the answers to
+   paste, then continue at h when they say they submitted.
 e. **Sign-in walls:** ask the user to sign in or create the account themselves, then continue.
    Never type passwords, create accounts or solve CAPTCHAs.
 f. **Before typing**, show the user in one short message what will go into this form and get a yes. Then fill it using

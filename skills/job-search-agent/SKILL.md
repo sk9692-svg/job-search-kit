@@ -49,9 +49,10 @@ search will be weaker until it's filled in.
 **A5. Create the files** (Drive `create_file`):
 1. Folder **Job Search Kit** (`application/vnd.google-apps.folder`), and inside it a folder **Cover Letters**.
 2. Doc **Resume (plain text)** in Job Search Kit: `contentMimeType` `text/plain`, the resume text as given.
-3. Doc **Candidate Profile** in Job Search Kit: `text/plain`, following the sections of the kit's profile template
-   (Who I am · Roles I want · How to score fit · Deal-breakers · Work-rights situation · Application answers ·
-   Drafts · Country notes), filled ONLY from the user's answers and resume. Anything not given → "ask me".
+3. Doc **Candidate Profile** in Job Search Kit: `text/plain`. Read `profile-template.md` (in this skill's folder) and
+   follow its sections in order (Who I am · Roles I want · How to score fit · Deal-breakers · Work-rights situation ·
+   Application answers · Drafts · Country notes), leaving out its instructions and {placeholders}, filled ONLY from
+   the user's answers and resume. Anything not given → "ask me".
    In "How to score fit", write strong / OK / weak from their target roles and core skills. In "Drafts", take
    experience highlights from the resume only, and write one logistics sentence per country from their answers.
 4. Sheet **Job Search Tracker** in Job Search Kit (`application/vnd.google-apps.spreadsheet`). Build it exactly as
@@ -59,7 +60,8 @@ search will be weaker until it's filled in.
    tab's header (and Summary formulas, Settings rows, Start Here text) with `update_values`; one more
    `update_spreadsheet` call for header formatting, frozen rows and dropdowns.
 5. Fill **Settings** with the three links and defaults, and **Markets** with one row per country (routes and boards
-   from `tracker-layout.md`, keywords from their target roles).
+   from `tracker-layout.md`, keywords from their target roles). Timezone: the user's own timezone if this session
+   knows it (their location or the time shown to you), otherwise ask in one line; don't guess.
 
 **A6. Verify.** Read back `Settings!A:B`, `Markets!A:F` and one header row; fix anything missing.
 
@@ -68,6 +70,10 @@ Candidate Profile once and correct anything (it drives every search), and the tw
 "Run the job search for {first country}" and "Start my application assistant". Offer to run the first search now,
 and to create scheduled tasks (one per country, e.g. twice a week) whose prompt is
 "Run the job-search-agent skill for {country}. My tracker is {Sheet link}."
+Create them with this session's scheduling tools if it has them (load with ToolSearch). If it has none, tell the user
+scheduled tasks need a paid plan and can be set up from Claude's scheduled-tasks area, and give them that prompt to
+paste. Mention that the apply assistant and live browser search need a browser Claude can use (the Claude in Chrome
+extension or the Claude desktop app's browser).
 
 ## Part B – Quick try (no Google needed)
 
