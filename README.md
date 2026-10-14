@@ -38,6 +38,7 @@ Read the profile once and fix anything – it drives every search. Then:
 
 - **"Run the job search for Canada"** – finds new jobs, scores them and drafts cover letters
 - **"Start my application assistant"** – helps you apply; you click Submit
+- **"Tailor my resume for lead 12"** – a version of your resume focused on that job, using only your real experience
 
 **Just want to try it?** Say **"quick job search"**. It searches one country and shows the best matches in the chat,
 with no Google connection and nothing saved.
@@ -90,6 +91,10 @@ countries you're serious about.
 - Run the apply assistant whenever you have time to apply. It shows you what it will type, stops on the final review
   page, and only submits if you say yes for that job.
 - You send LinkedIn notes yourself.
+- Want a cover letter for every lead, not just strong matches? Set `cover_letter_min_fit` in Settings to a lower
+  number (uses more of your Claude usage).
+- Searching in India? Set up job alerts on Naukri, Instahyre, Cutshort, Hirist or Foundit and connect Gmail; the agent
+  reads those alerts and checks each job on the employer's own site.
 
 ## Safety rules built in
 

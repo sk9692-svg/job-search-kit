@@ -1,6 +1,6 @@
 ---
 name: apply-assistant
-description: Use when the user asks to apply for jobs, start their application assistant, update application statuses, or work through new leads in their job tracker. Syncs statuses from Gmail, removes duplicates, helps fill application forms in the browser with the user's approval, and records every outcome.
+description: Use when the user asks to apply for jobs, start their application assistant, update application statuses, tailor their resume for a job, or work through new leads in their job tracker. Syncs statuses from Gmail, removes duplicates, tailors the resume to a job using only real facts, helps fill application forms in the browser with the user's approval, and records every outcome.
 ---
 
 # Application assistant (on demand)
@@ -86,6 +86,7 @@ a. Check the posting is still open and still fits the user's work rights. Closed
 b. Find the direct employer apply link (not an aggregator) and note the ATS.
 c. Cover letter: use column W. If empty and fit is 7+, write one following the profile's Drafts section and the
    FACTS RULE, save it in the cover-letter folder and put its link in W.
+c2. Tailored resume (offer it; make it only on a yes): see "Tailored resume" below. Use it as the upload for this job.
 d. Open the apply page in the user's browser (read that browser's skill first).
 e. **Sign-in walls:** ask the user to sign in or create the account themselves, then continue.
    Never type passwords, create accounts or solve CAPTCHAs.
@@ -104,6 +105,23 @@ i. If they decide not to apply: ask the reason in a few words, add a Reviewed - 
 
 Keep it moving: one short status line between jobs. If a site blocks automation, give the user the direct link, cover
 letter and answers to paste, and still record the outcome when they tell you.
+
+## Tailored resume (on request, or offered at step c2)
+
+Also runs on its own when the user asks, e.g. "tailor my resume for lead 12" or with a pasted job link.
+
+1. Read the full job ad and the resume doc (`resume_doc`).
+2. Make a copy that fits this job, using ONLY what the resume already says:
+   - Rewrite the summary (2–3 lines) around the ad's main requirements the user really meets.
+   - Reorder skills and bullets so the most relevant come first; drop or shorten unrelated ones.
+   - Use the ad's wording for a skill only when the resume clearly shows that skill (e.g. "C++" → "Modern C++" only if
+     the resume says C++11/14/17).
+   - **Never** add skills, tools, titles, employers, dates, degrees, numbers or results that aren't in the resume.
+     Gaps stay gaps; the cover letter handles them honestly.
+3. Save it with Drive `create_file` (`contentMimeType` `text/plain`) in the cover-letter folder, titled
+   "Resume – {Company} – {Role}", and put its link in that lead's Agent Notes (append "Tailored resume: {link}").
+4. Tell the user in 2–3 lines what you changed (moved up, shortened, reworded) and ask them to review it. They export
+   it to PDF themselves (in Google Docs: File → Download → PDF) before uploading.
 
 ## 4. Finish
 

@@ -82,4 +82,5 @@ Fill one row per target country. If the user needs no sponsorship there, write "
 | Ireland | Critical Skills Employment Permit or General Employment Permit | LinkedIn alerts, company careers pages |
 | Australia | Employer-sponsored visa (e.g. Skills in Demand, subclass 482) through an approved sponsor | Seek AU (alerts by email, from:seek.com.au), LinkedIn alerts |
 | New Zealand | Accredited Employer Work Visa (employer must be accredited by Immigration NZ) | Seek NZ (alerts by email, from:seek.co.nz), LinkedIn alerts |
+| India | Citizens need none; for others, an Employment visa sponsored by the employer | Naukri, Instahyre, Cutshort, Hirist, Foundit, LinkedIn alerts, company careers pages. These boards mostly block automated reading, so in Notes write the alert senders to read in Gmail (from:naukri.com OR from:instahyre.com OR from:foundit.in OR from:cutshort.io OR from:hirist.tech) and verify each job on the employer's own site |
 | Other | Write "Check official government sources" and ask the user what they know | LinkedIn alerts, company careers pages |

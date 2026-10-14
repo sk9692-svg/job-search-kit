@@ -12,6 +12,7 @@ This is not legal or immigration advice.
 | New Zealand | Accredited Employer Work Visa (AEWV): the employer must be accredited by Immigration NZ (public list available). | Seek NZ (alerts by email), LinkedIn alerts, company careers pages | {your role keywords} | Auckland, Wellington, Christchurch | Alerts sender: from:seek.co.nz |
 | Australia | Employer-sponsored visas (e.g. Skills in Demand, subclass 482) through an approved sponsor. | Seek AU (alerts by email), LinkedIn alerts, company careers pages | {your role keywords} | Sydney, Melbourne, Brisbane | Reject ads requiring citizenship, PR or "full work rights". Alerts sender: from:seek.com.au |
 | United Kingdom | Skilled Worker visa through a licensed sponsor (the Home Office publishes the register of licensed sponsors). | LinkedIn alerts, Otta/Welcome to the Jungle, company careers pages | {your role keywords} | London, Manchester, Edinburgh | |
+| India | Citizen / no sponsorship needed (others: Employment visa sponsored by the employer) | Naukri, Instahyre, Cutshort, Hirist, Foundit, LinkedIn alerts, company careers pages | {your role keywords} | Bengaluru, Hyderabad, Pune, Chennai, Gurugram, Noida, remote | Set up job alerts on those boards; alert senders: from:naukri.com OR from:instahyre.com OR from:foundit.in OR from:cutshort.io OR from:hirist.tech. The agent verifies each job on the employer's site. |
 
 If you don't need sponsorship in a country, write "Citizen / no sponsorship needed" in the route column. The agent will
 then skip the sponsorship check and focus on fit.
