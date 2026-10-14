@@ -19,7 +19,15 @@ Your data stays in your own Google Drive and Claude account. Nothing is sent to 
 
 ## What you need
 
-- A paid Claude plan is recommended (Free works for trying it, but scheduled runs use a lot of usage).
+- A Claude account. What each plan can do:
+
+  | | Free | Paid (Pro, Max, Team, Enterprise) |
+  |---|---|---|
+  | Setup, manual searches, quick try, tailored resume, apply assistant | ✅ | ✅ |
+  | Automatic scheduled searches (e.g. twice a week, overnight) | ❌ | ✅ |
+  | Room for full search runs | Limited – a run reads many pages and may hit Free limits | ✅ More room |
+
+  On Free, start with **"quick job search"**, or lower `max_new_postings_per_run` in Settings (e.g. 5).
 - "Code execution and file creation" turned on in Claude **Settings → Capabilities** (skills need it).
 - The **Google Drive** and **Google Sheets** connectors connected in Claude (**Gmail** optional).
 - For the apply assistant: a browser Claude can use (Claude in Chrome, or the browser in the Claude desktop app).
