@@ -80,12 +80,23 @@ extension or the Claude desktop app's browser).
 For someone trying it out, or without Google connected. Nothing is saved.
 1. Ask in one message: target titles, one country (and city or remote), whether they need sponsorship there, and to
    attach or paste their resume (optional but makes the fit scores real).
-2. Search that country's boards and employer careers pages (WebSearch / WebFetch) for roles posted in the last 14 days.
+2. Search for roles posted in the last 14 days, in this order:
+   a. The job boards listed for that country in `tracker-layout.md` ("Markets rows" table). WebFetch their search
+      pages with the target title + city and newest-first sorting. These give much fresher results than web search.
+   b. Careers pages of known employers in that country, using the feed rules in Step 4 (find the real careers page
+      first; never guess a feed name).
+   c. WebSearch only to fill gaps. Skip freelance or contract project sites unless the user wants contract work, and
+      skip anything older than 14 days.
    Open up to 10 promising postings and read each in full.
 3. Score each honestly (Step 6 rules: fit 1–10, matched, missing, work-rights evidence; reject citizens-only /
-   no-sponsorship ads if they need sponsorship).
+   no-sponsorship ads if they need sponsorship). For postings found on an aggregator, follow the Step 6 "Aggregator
+   postings" rule.
 4. Show the best 5–8 in a table: Company · Role · Location · Fit · Why · Work rights · Link. Mention how many were
    rejected and why, in one line.
+   **Fewer than 5 pass?** Don't lower the scores to fill the table. Show the ones that passed, then up to 3
+   near-misses in a separate short list marked "Near miss", each with the one reason it missed (e.g. "no visa
+   sponsorship", "needs German C1", "fit 5: missing Kubernetes, Go"). Then suggest one way to widen the search
+   (another city, remote, a related title) and offer to run it.
 5. Offer the full version: "Connect Google Drive and Sheets, then say *set up my job search* – I'll keep a tracker,
    avoid duplicates, draft cover letters and run this on a schedule."
 
@@ -192,13 +203,21 @@ Scan every priority-A company for this country, plus the 10 priority-B companies
 Skip X. For each:
 - If `feed_url` is set, WebFetch it and ask only for jobs matching the profile's target roles in this country
   (title, location, URL, posted date). Keep postings dated after last_scanned − 1 day.
-- If there is no feed yet, find the careers page once and try the public feeds:
+- If there is no feed yet, find the careers page once (WebSearch "{company} careers") and read the real board name
+  ({token}) from where its job links point (e.g. `job-boards.greenhouse.io/{token}/...`, `jobs.lever.co/{token}/...`).
+  Never guess a token from the company name – a wrong guess just errors. Then try the public feeds:
   - Greenhouse `https://boards-api.greenhouse.io/v1/boards/{token}/jobs`
   - Lever `https://api.lever.co/v0/postings/{token}?mode=json`
   - Ashby `https://api.ashbyhq.com/posting-api/job-board/{token}`
   - SmartRecruiters `https://api.smartrecruiters.com/v1/companies/{token}/postings?limit=100`
   - Workable `https://apply.workable.com/api/v1/widget/accounts/{token}`
   - Others (Workday, SuccessFactors, Taleo): WebFetch the careers search page filtered to the country.
+- **Long job lists get cut off.** Big companies' feeds are often too long to read in one fetch, and jobs at the end
+  are silently missed. Ask for narrower results first: Lever `&location={city}` or `&team={team}`; SmartRecruiters
+  `&country={2-letter code}&q={keyword}`; for Greenhouse, Ashby and Workable, fetch the board's own web page with a
+  location or keyword filter if it has one. If a fetch result says the content was cut off or incomplete, fetch
+  again narrower; if that's not possible, write "feed cut off – partial scan" in that company's notes and in the
+  run report, so the user knows the scan wasn't complete.
 - Write back with ONE `update_values` per company on `Watchlist!E{row}:K{row}` (send unchanged cells back as they were),
   with last_scanned = TODAY and notes starting with the date.
 
@@ -230,6 +249,13 @@ c. **Honest resume match**, line by line against the resume and profile:
    risks (language, relocation, contract-only, salary below a visa threshold, seniority mismatch, or "none").
 d. **Fit score 1–10** using the profile's priorities and Step 2 feedback. Missing 3+ core must-haves → max 6.
    Any deal-breaker from the profile → reject. Add only jobs at or above `min_fit_score`.
+e. **Aggregator postings** (Arbeitnow, GermanTechJobs, Job Bank, Indeed copies and similar sites that re-post other
+   companies' jobs): look for the same job on the employer's own careers page or ATS (company + title). If found, use
+   that as the Job Link and take the posted date from there. If not, keep the aggregator link, write "via {site} –
+   employer posting not found" in Agent Notes, and if the site shows only a relative date ("12 hours ago"), turn it
+   into a date from TODAY and add "(approx.)". If the ad shows no date at all, write "date not shown".
+f. **Posting with no real details** (only a title or a slogan, no requirements): don't guess a fit score. Reject it
+   with reason "no details to verify – check it yourself" so the user still sees it.
 
 ## 7. Application drafts
 

@@ -143,6 +143,9 @@ countries you're serious about.
 
 ## Changelog
 
+- **v0.2.1** – Fixes from testing: quick try searches each country's job boards first and shows "near misses" when
+  few jobs pass; careers feeds use the real board name and narrower requests so long job lists aren't cut off;
+  re-posted jobs are traced back to the employer's own posting; Germany boards updated.
 - **v0.2** – One-sentence setup ("Set up my job search"), quick-try mode without Google, India job boards via alerts,
   tailored resume per job (real facts only), live browser search for portals like Naukri and Instahyre, Free vs paid
   guide.
