@@ -143,6 +143,10 @@ countries you're serious about.
 
 ## Changelog
 
+- **v0.2.2** – More fixes from testing: boards' "posted minutes ago" times are no longer trusted (Arbeitnow re-posts
+  the same job under new IDs), so re-posts are merged and dates come from the employer; city filters are checked by
+  the agent itself and city names with umlauts work; EU Greenhouse boards are read from their web pages; remote-only
+  roles are flagged as a work-rights risk for people who need sponsorship.
 - **v0.2.1** – Fixes from testing: quick try searches each country's job boards first and shows "near misses" when
   few jobs pass; careers feeds use the real board name and narrower requests so long job lists aren't cut off;
   re-posted jobs are traced back to the employer's own posting; Germany boards updated.

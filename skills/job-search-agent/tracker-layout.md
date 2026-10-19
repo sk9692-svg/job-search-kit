@@ -77,7 +77,7 @@ Fill one row per target country. If the user needs no sponsorship there, write "
 | Canada | Employer-supported work permit: LMIA, or LMIA-exempt routes such as the Global Talent Stream | Job Bank, LinkedIn alerts, company careers pages, Greenhouse/Lever boards |
 | United States | Employer-sponsored work visa (e.g. H-1B; others depend on nationality) | LinkedIn alerts, company careers pages, Greenhouse/Lever/Ashby boards |
 | United Kingdom | Skilled Worker visa through a licensed sponsor (Home Office register of licensed sponsors) | LinkedIn alerts, company careers pages |
-| Germany | EU Blue Card; prefer English-language roles | Arbeitnow (has a visa-sponsorship filter, but check each ad), GermanTechJobs (tech roles, shows salary and visa yes/no), StepStone, LinkedIn alerts, company careers pages |
+| Germany | EU Blue Card; prefer English-language roles | Arbeitnow (has a visa-sponsorship filter, but check each ad; re-posts jobs under new IDs with fresh "minutes ago" times, and its location filter is loose), GermanTechJobs (tech roles, shows salary and visa yes/no on the job page; city pages like `/jobs/C++/Berlin` may list all of Germany – filter yourself; write München as `Muenchen`), StepStone, LinkedIn alerts, company careers pages |
 | Netherlands | Highly skilled migrant through a recognised sponsor (IND public register) | LinkedIn alerts, company careers pages |
 | Ireland | Critical Skills Employment Permit or General Employment Permit | LinkedIn alerts, company careers pages |
 | Australia | Employer-sponsored visa (e.g. Skills in Demand, subclass 482) through an approved sponsor | Seek AU (alerts by email, from:seek.com.au), LinkedIn alerts |
